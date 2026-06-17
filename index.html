@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simphiwe — Electrical Engineer & Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKEN SYSTEM ───────────────────────────────────────────── */
+    :root {
+      --soil:    #1C1208;   /* near-black background */
+      --bark:    #3A2410;   /* dark card surfaces    */
+      --clay:    #8B4513;   /* deep terracotta       */
+      --ochre:   #C8822A;   /* warm gold accent      */
+      --savanna: #E8C97A;   /* pale highlight        */
+      --bone:    #F5EFE0;   /* off-white text        */
+      --muted:   #9C8E7A;   /* secondary text        */
+      --grass:   #5B7B4E;   /* subtle green accent   */
+
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+      --mono:    'DM Mono', monospace;
+
+      --r: 6px;
+      --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--soil);
+      color: var(--bone);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: var(--display);
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      line-height: 1.15;
+    }
+    h1 { font-size: clamp(3rem, 8vw, 7rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+    h3 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
+    h4 { font-size: 1.1rem; font-weight: 400; }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ochre);
+    }
+
+    a { color: var(--ochre); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--savanna); }
+
+    /* ── LAYOUT HELPERS ─────────────────────────────────────────── */
+    .container {
+      width: min(1100px, 92vw);
+      margin-inline: auto;
+    }
+    .section {
+      padding: clamp(5rem, 10vw, 9rem) 0;
+    }
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+    .section-header .eyebrow {
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--ochre);
+      margin-top: 1.2rem;
+    }
+
+    /* ── NAV ────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 0;
+      background: transparent;
+      transition: background var(--transition), backdrop-filter var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(28,18,8,0.9);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      width: min(1100px, 92vw);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--bone);
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-family: var(--mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--savanna); }
+
+    /* ── HERO ───────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    /* SVG circuit-baobab roots pattern */
+    .hero-bg svg {
+      width: 100%; height: 100%;
+      opacity: 0.12;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 8rem 0 6rem;
+      width: min(1100px, 92vw);
+      margin-inline: auto;
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-text .eyebrow { margin-bottom: 1.2rem; }
+    .hero-name {
+      color: var(--bone);
+      font-style: italic;
+    }
+    .hero-name em {
+      font-style: normal;
+      color: var(--ochre);
+    }
+    .hero-tagline {
+      margin-top: 1.4rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 38ch;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--r);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: all var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--ochre);
+      color: var(--soil);
+    }
+    .btn-primary:hover {
+      background: var(--savanna);
+      color: var(--soil);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--bone);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .btn-outline:hover {
+      border-color: var(--ochre);
+      color: var(--ochre);
+    }
+
+    /* Photo / decoration side */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo-frame {
+      width: clamp(220px, 28vw, 380px);
+      aspect-ratio: 3/4;
+      border-radius: 4px 60px 4px 60px;
+      background: var(--bark);
+      border: 1px solid var(--clay);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero-photo-placeholder svg {
+      opacity: 0.4;
+    }
+    .photo-accent {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: var(--ochre);
+      opacity: 0.15;
+    }
+    .photo-accent-2 {
+      position: absolute;
+      top: -15px; left: -15px;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: var(--grass);
+      opacity: 0.25;
+    }
+    .hero-stats {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      gap: 3rem;
+      width: min(1100px, 92vw);
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-stat strong {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      color: var(--ochre);
+      font-weight: 300;
+    }
+    .hero-stat span {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────────────── */
+    #about { background: var(--bark); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-aside {
+      position: sticky;
+      top: 6rem;
+    }
+    .about-aside h2 { margin-top: 0.5rem; }
+    .values-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .value-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .value-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ochre);
+      flex-shrink: 0;
+    }
+    .about-body p {
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+      font-size: 1rem;
+    }
+    .about-body p strong {
+      color: var(--bone);
+      font-weight: 500;
+    }
+    .quote-block {
+      margin: 2.5rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 3px solid var(--ochre);
+      background: rgba(200,130,42,0.06);
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+    .quote-block p {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--bone);
+      margin-bottom: 0 !important;
+      line-height: 1.5;
+    }
+
+    /* ── SKILLS ─────────────────────────────────────────────────── */
+    #skills { background: var(--soil); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--bark);
+      border: 1px solid rgba(200,130,42,0.12);
+      border-radius: var(--r);
+      padding: 2rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .skill-card:hover {
+      border-color: rgba(200,130,42,0.5);
+      transform: translateY(-4px);
+    }
+    .skill-card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .skill-card h4 {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      margin-bottom: 1.2rem;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+      font-size: 0.88rem;
+    }
+    .skill-item-name { color: var(--bone); }
+    .skill-bar-track {
+      width: 80px;
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--clay), var(--ochre));
+      border-radius: 2px;
+      transform-origin: left;
+      animation: barGrow 1.2s ease forwards;
+      animation-play-state: paused;
+    }
+    .skill-bar-fill.animated { animation-play-state: running; }
+    @keyframes barGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    /* ── PROJECTS ───────────────────────────────────────────────── */
+    #projects { background: var(--bark); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--soil);
+      border: 1px solid rgba(200,130,42,0.1);
+      border-radius: var(--r);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover {
+      border-color: rgba(200,130,42,0.4);
+      box-shadow: 0 8px 32px rgba(200,130,42,0.08);
+    }
+    .project-tag {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      background: rgba(200,130,42,0.12);
+      border-radius: 20px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ochre);
+    }
+    .project-card h3 {
+      font-size: 1.3rem;
+      color: var(--bone);
+    }
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      flex: 1;
+    }
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .project-link {
+      color: var(--ochre);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .project-link:hover { color: var(--savanna); }
+
+    /* ── LEADERSHIP TIMELINE ────────────────────────────────────── */
+    #leadership { background: var(--soil); }
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--ochre), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.4rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--ochre);
+      border: 2px solid var(--soil);
+      box-shadow: 0 0 0 3px rgba(200,130,42,0.2);
+    }
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      margin-bottom: 0.4rem;
+    }
+    .timeline-item h3 {
+      font-size: 1.25rem;
+      color: var(--bone);
+      margin-bottom: 0.3rem;
+    }
+    .timeline-org {
+      font-size: 0.85rem;
+      color: var(--clay);
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+    .timeline-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    /* ── EDUCATION ──────────────────────────────────────────────── */
+    #education { background: var(--bark); }
+    .edu-card {
+      background: var(--soil);
+      border: 1px solid rgba(200,130,42,0.12);
+      border-radius: var(--r);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .edu-card h3 {
+      font-size: 1.8rem;
+      color: var(--bone);
+      margin: 0.4rem 0;
+    }
+    .edu-institution {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      color: var(--ochre);
+      text-transform: uppercase;
+    }
+    .edu-graduation {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+    .edu-highlights {
+      list-style: none;
+    }
+    .edu-highlights li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .edu-highlights li::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--ochre);
+      flex-shrink: 0;
+    }
+    .edu-highlights li strong {
+      color: var(--bone);
+    }
+
+    /* ── CONTACT ────────────────────────────────────────────────── */
+    #contact { background: var(--soil); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-intro p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    .contact-links {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--bark);
+      border: 1px solid rgba(200,130,42,0.1);
+      border-radius: var(--r);
+      color: var(--bone);
+      transition: all var(--transition);
+    }
+    .contact-link:hover {
+      border-color: var(--ochre);
+      color: var(--ochre);
+      transform: translateX(4px);
+    }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: rgba(200,130,42,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-link-text {
+      font-size: 0.9rem;
+    }
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: var(--bark);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r);
+      padding: 0.8rem 1rem;
+      color: var(--bone);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color var(--transition);
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--ochre);
+    }
+    .form-group textarea { min-height: 120px; }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .footer-flag {
+      font-size: 1.2rem;
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-content,
+      .about-grid,
+      .contact-grid,
+      .edu-card {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .hero-visual { display: none; }
+      .about-aside { position: static; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ────────────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Simphiwe</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <!-- Circuit-meets-baobab-roots signature pattern -->
+    <svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Root/branch paths -->
+      <g stroke="#C8822A" fill="none" stroke-width="1">
+        <path d="M700,900 C700,800 650,700 600,600 C560,520 480,480 400,420 C320,360 200,340 100,300"/>
+        <path d="M700,900 C700,780 720,680 760,580 C800,480 880,420 940,340 C1000,260 1100,220 1200,160"/>
+        <path d="M700,900 C710,820 680,740 640,660 C600,580 560,520 500,460 C440,400 380,360 300,320"/>
+        <path d="M700,900 C720,800 750,700 780,600 C810,500 850,440 900,380 C950,320 1020,280 1100,240"/>
+        <path d="M700,900 C690,820 710,730 720,640 C730,550 700,480 680,400"/>
+        <!-- Horizontal circuit lines -->
+        <line x1="200" y1="300" x2="100" y2="300"/>
+        <circle cx="100" cy="300" r="4" fill="#C8822A"/>
+        <line x1="1200" y1="160" x2="1300" y2="160"/>
+        <circle cx="1300" cy="160" r="4" fill="#C8822A"/>
+        <line x1="400" y1="420" x2="340" y2="420"/>
+        <circle cx="340" cy="420" r="3" fill="#C8822A"/>
+        <line x1="940" y1="340" x2="1010" y2="340"/>
+        <circle cx="1010" cy="340" r="3" fill="#C8822A"/>
+        <!-- Small node dots -->
+        <circle cx="600" cy="600" r="4" fill="#C8822A"/>
+        <circle cx="760" cy="580" r="4" fill="#C8822A"/>
+        <circle cx="500" cy="460" r="3" fill="#C8822A"/>
+        <circle cx="900" cy="380" r="3" fill="#C8822A"/>
+        <!-- Ground lines -->
+        <line x1="0" y1="860" x2="1400" y2="860" stroke-opacity="0.3"/>
+        <line x1="300" y1="860" x2="300" y2="870"/>
+        <line x1="700" y1="860" x2="700" y2="870"/>
+        <line x1="1100" y1="860" x2="1100" y2="870"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-content container">
+    <div class="hero-text">
+      <span class="eyebrow">Electrical Engineer · Wits University · 2026</span>
+      <h1 class="hero-name">
+        Sim<em>phiwe</em>
+      </h1>
+      <p class="hero-tagline">
+        Power systems. High voltage. Student leadership. Building the infrastructure of tomorrow's South Africa.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-photo-frame">
+        <div class="hero-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Add your photo
+        </div>
+        <div class="photo-accent"></div>
+        <div class="photo-accent-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats container">
+    <div class="hero-stat">
+      <strong>200+</strong>
+      <span>Students Represented</span>
+    </div>
+    <div class="hero-stat">
+      <strong>4</strong>
+      <span>Years Engineering</span>
+    </div>
+    <div class="hero-stat">
+      <strong>2026</strong>
+      <span>BSc Hons Graduate</span>
+    </div>
+    <div class="hero-stat">
+      <strong>JHB</strong>
+      <span>Johannesburg, ZA</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────────────── -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-aside reveal">
+        <span class="eyebrow">About Me</span>
+        <h2>Engineer. Leader. System Thinker.</h2>
+        <div class="divider"></div>
+        <div class="values-list">
+          <div class="value-tag"><span class="value-dot"></span>Excellence & rigour</div>
+          <div class="value-tag"><span class="value-dot"></span>Service to community</div>
+          <div class="value-tag"><span class="value-dot"></span>Systems thinking</div>
+          <div class="value-tag"><span class="value-dot"></span>Lifelong learning</div>
+          <div class="value-tag"><span class="value-dot"></span>Integrity in practice</div>
+        </div>
+      </div>
+
+      <div class="about-body reveal">
+        <p>
+          I am a final-year <strong>BSc (Hons) Electrical Engineering</strong> student at the <strong>University of the Witwatersrand</strong> in Johannesburg, graduating in 2026. My degree spans power systems, high-voltage engineering, control, instrumentation, signal processing, and systems management — a deliberately broad foundation for solving complex infrastructure challenges.
+        </p>
+        <p>
+          Beyond the lecture hall, I have led. As <strong>EIE Student Council Chairperson</strong>, I represented over 200 students and worked to bridge the gap between student experience and institutional governance. As <strong>Treasurer of the Faculty of Engineering and Built Environment Student Council</strong>, I gained practical exposure to financial stewardship in an institutional setting.
+        </p>
+        <div class="quote-block">
+          <p>"The best engineers I have seen are the ones who understand that every technical system is embedded in a human one."</p>
+        </div>
+        <p>
+          My interest in <strong>renewable energy</strong> — particularly solar — grew through self-directed study alongside formal coursework in power and high-voltage engineering. I have also participated in the <strong>FirstRand START Quant Summer School</strong>, which deepened my appreciation for quantitative modelling and data-driven decision-making.
+        </p>
+        <p>
+          I am open to relocating within South Africa and am actively seeking graduate opportunities in <strong>power, energy, and electrical engineering</strong> where I can contribute meaningfully from day one.
+        </p>
+        <a href="#contact" class="btn btn-outline" style="margin-top:1rem; display:inline-flex;">Download CV →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ─────────────────────────────────────────────────── -->
+<section id="skills" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Capabilities</span>
+      <h2>Skills & Expertise</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">⚡</div>
+        <h4>Power & Energy</h4>
+        <div class="skill-item">
+          <span class="skill-item-name">Power Systems Engineering</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">High Voltage Engineering</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Solar PV (self-directed)</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Energy Auditing</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🎛</div>
+        <h4>Control & Instrumentation</h4>
+        <div class="skill-item">
+          <span class="skill-item-name">Control Systems (Control I)</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Probabilistic Systems</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Signal Processing</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Instrumentation Design</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">⚙️</div>
+        <h4>Systems Engineering</h4>
+        <div class="skill-item">
+          <span class="skill-item-name">Systems Thinking (SSM)</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">CATWOE / Iceberg Model</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">FFBDs & N² Diagrams</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">House of Quality / QFD</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">💻</div>
+        <h4>Tools & Analytics</h4>
+        <div class="skill-item">
+          <span class="skill-item-name">MATLAB / Simulink</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Python</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Microsoft Office Suite</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-item-name">Quantitative Modelling</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ───────────────────────────────────────────────── -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Selected Work</span>
+      <h2>Projects</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <span class="project-tag">Energy Audit</span>
+        <h3>PIMD Building Energy Audit — Wits</h3>
+        <p>Conducted a real energy audit on the PIMD Building at the University of the Witwatersrand. Assessed current energy consumption patterns, identified inefficiencies, and proposed practical interventions aligned with South African energy constraints.</p>
+        <div class="project-footer">
+          <span>Power Engineering · Wits</span>
+          <a href="#" class="project-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Systems Engineering</span>
+        <h3>Systems Thinking Case Studies</h3>
+        <p>Developed a comprehensive question bank of 15 case studies and a 30-question exam paper covering CATWOE, the Iceberg Model, Six Thinking Hats, Soft Systems Methodology, and Functional Flow Block Diagrams for MECN 4020.</p>
+        <div class="project-footer">
+          <span>MECN 4020 · 2025</span>
+          <a href="#" class="project-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Quantitative Finance</span>
+        <h3>FirstRand START Quant Summer School</h3>
+        <p>Participated in the FirstRand START Quantitative Summer School, gaining exposure to quantitative modelling, financial mathematics, and data-driven analysis at the intersection of engineering and finance.</p>
+        <div class="project-footer">
+          <span>FirstRand · Summer Programme</span>
+          <a href="#" class="project-link">Details →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Final Year Project</span>
+        <h3>Final Year Research Project</h3>
+        <p>BSc (Hons) final year research project — details to be added. Completing the senior capstone research requirement as part of the Electrical Engineering Honours programme at Wits.</p>
+        <div class="project-footer">
+          <span>Wits EIE · 2026</span>
+          <a href="#" class="project-link">Details →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── LEADERSHIP ─────────────────────────────────────────────── -->
+<section id="leadership" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Leadership</span>
+      <h2>Giving Back to the Community</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2024 – 2025</div>
+        <h3>EIE Student Council Chairperson</h3>
+        <div class="timeline-org">School of Electrical & Information Engineering, Wits University</div>
+        <p>Led the student council representing over 200 students across the school, advocating for student welfare, academic experience, and departmental engagement. Coordinated meetings, managed stakeholder relationships, and drove initiatives that improved the student environment.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2024 – 2025</div>
+        <h3>Treasurer — Faculty of Engineering & Built Environment Student Council</h3>
+        <div class="timeline-org">Faculty of Engineering & Built Environment, Wits University</div>
+        <p>Managed the financial operations of the Faculty Student Council, ensuring responsible stewardship of student funds, accurate record-keeping, and budget planning for faculty-level events and programmes.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2023 – 2024</div>
+        <h3>Teaching Assistant</h3>
+        <div class="timeline-org">University of the Witwatersrand</div>
+        <p>Supported undergraduate students in core electrical engineering modules, providing academic guidance, facilitating tutorials, and helping peers develop stronger conceptual foundations in engineering fundamentals.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ──────────────────────────────────────────────── -->
+<section id="education" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Academic Background</span>
+      <h2>Education</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="edu-card reveal">
+      <div>
+        <span class="edu-institution">University of the Witwatersrand</span>
+        <h3>BSc (Hons) Electrical Engineering</h3>
+        <p class="edu-graduation">Expected graduation: 2026 · Johannesburg, South Africa</p>
+        <div style="margin-top:1.5rem; font-size:0.88rem; color:var(--muted); max-width:38ch; line-height:1.8;">
+          A rigorous, multidisciplinary programme spanning power systems, control, high voltage, instrumentation, signal processing, digital electronics, and systems management.
+        </div>
+      </div>
+      <div>
+        <p style="font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ochre); margin-bottom:0.8rem;">Academic Highlights</p>
+        <ul class="edu-highlights">
+          <li><strong>Power Engineering</strong> — strong academic result</li>
+          <li><strong>High Voltage Engineering</strong> — strong academic result</li>
+          <li><strong>Control I</strong> — strong academic result</li>
+          <li><strong>Probabilistic Systems</strong> — strong academic result</li>
+          <li><strong>Systems Management & Integration</strong> — final year</li>
+          <li>Valid driver's licence &amp; South African passport holder</li>
+          <li>Open to relocation within South Africa</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────────── -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-intro reveal">
+        <span class="eyebrow">Get In Touch</span>
+        <h2>Let's Connect</h2>
+        <div class="divider"></div>
+        <p style="margin-top:1.5rem;">
+          I am currently seeking graduate electrical engineering opportunities in South Africa, particularly in power, energy, and solar sectors. If you are a recruiter, engineer, or potential collaborator — I would love to hear from you.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:your.email@example.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            <div>
+              <div class="contact-link-text">your.email@example.com</div>
+              <div class="contact-link-label">Email</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+            <div class="contact-link-icon">in</div>
+            <div>
+              <div class="contact-link-text">linkedin.com/in/yourprofile</div>
+              <div class="contact-link-label">LinkedIn</div>
+            </div>
+          </a>
+          <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+            <div class="contact-link-icon">gh</div>
+            <div>
+              <div class="contact-link-text">github.com/yourusername</div>
+              <div class="contact-link-label">GitHub</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Jane Dlamini" />
+        </div>
+        <div class="form-group">
+          <label for="org">Organisation</label>
+          <input type="text" id="org" placeholder="Eskom / SolarAfrica / ..." />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@company.co.za" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell me about the opportunity..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="alert('Form submitted! (Connect this to Formspree or Netlify Forms for real submissions.)')">
+          Send Message →
+        </button>
+        <p style="font-size:0.78rem; color:var(--muted); margin-top:0.5rem;">
+          References available upon request — Dr Mohammed Dangor (Wits), Veronicah Moloi (Wits), Mpho Matloga (Lufhereng Secondary).
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-inner">
+    <p class="footer-copy">© 2026 Simphiwe — Electrical Engineer, Wits University</p>
+    <span class="footer-flag">🇿🇦</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Animate skill bars when they come into view
+        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.classList.add('animated');
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Staggered reveal for cards
+  document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 0.08}s`;
+  });
+</script>
+</body>
+</html>
