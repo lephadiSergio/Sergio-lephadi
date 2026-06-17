@@ -96,8 +96,9 @@
       transition: background var(--transition), backdrop-filter var(--transition);
     }
     nav.scrolled {
-      background: rgba(28,18,8,0.95);
+      background: rgba(28,18,8,0.98);
       backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .nav-inner {
       width: min(1100px, 92vw);
@@ -105,6 +106,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
     .nav-logo {
       font-family: var(--display);
@@ -127,6 +129,21 @@
       transition: color var(--transition);
     }
     .nav-links a:hover { color: var(--savanna); }
+
+    /* Mobile Menu Button */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 101;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background: var(--bone);
+      transition: all 0.3s ease;
+    }
 
     /* ── HERO ───────────────────────────────────────────────────── */
     #hero {
@@ -510,12 +527,43 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    /* ── RESPONSIVE MOBILE FIXES ────────────────────────────────── */
     @media (max-width: 900px) {
-      .hero-content, .story-grid, .academic-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
-      .nav-links { display: none; }
-      .hero-visual { order: -1; margin-bottom: 2rem; }
-      .hero-stats { position: relative; bottom: 0; transform: none; left: 0; justify-content: flex-start; margin-top: 2rem;}
+      /* Stack grids */
+      .hero-content, .story-grid, .academic-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 3.5rem; }
+      
+      /* Mobile Nav Adjustments */
+      .menu-toggle { display: flex; }
+      .nav-links {
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(28,18,8,0.98);
+        flex-direction: column;
+        padding: 2rem; gap: 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Hidden by default */
+        transition: clip-path 0.4s ease;
+      }
+      .nav-links.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Revealed */
+      }
+      
+      /* Hero Adjustments */
+      .hero-content { padding-top: 6rem; padding-bottom: 2rem; }
+      .hero-visual { order: -1; margin-bottom: 1rem; }
+      .hero-stats { position: relative; bottom: 0; transform: none; left: 0; justify-content: flex-start; margin-top: 2rem; gap: 2rem; }
+      
+      /* Section Spacing Adjustments */
+      .section { padding: 5rem 0; }
+      .highlight-card { padding: 2rem; }
+      .edu-card { padding: 2rem; }
+      
+      /* iOS Parallax Fix */
+      .parallax-section {
+        background-attachment: scroll; /* Fixes the massive zoom glitch on iPhones */
+        padding: 6rem 0;
+      }
     }
   </style>
 </head>
@@ -525,6 +573,14 @@
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">Sergio.</a>
+    
+    <!-- Mobile Hamburger Icon -->
+    <div class="menu-toggle" id="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <ul class="nav-links">
       <li><a href="#story">My Story</a></li>
       <li><a href="#academics">Academics</a></li>
@@ -911,6 +967,21 @@
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile Menu Toggle Logic
+  const mobileMenuBtn = document.getElementById('mobile-menu');
+  const navLinks = document.querySelector('.nav-links');
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Close mobile menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
   });
 
   // Scroll reveal
